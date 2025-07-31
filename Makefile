@@ -17,11 +17,11 @@ s21_matrix_oop.a:
 	ranlib s21_matrix_oop.a
 
 test: s21_matrix_oop.a
-	${CC} ${FLAGS} tests/*.cpp -o test.out ${TEST_FLAGS} -L. -l:s21_matrix_oop.a
+	${CC} ${FLAGS} tests/*.cpp -o test.out ${TEST_FLAGS} -L. -l:s21_matrix_oop
 	./test.out
 
 gcov_report: 
-	${CC} ${FLAGS} -fprofile-arcs -ftest-coverage *.cpp tests/*.cpp -o test.out ${TEST_FLAGS}
+	${CC} ${FLAGS} -fprofile-arcs -ftest-coverage tests/*.cpp -o test.out ${TEST_FLAGS} -L. -l:s21_matrix_oop.a
 	./test.out
 	lcov -t "test.result" -o test.info -c -d .
 	genhtml -o report test.info
